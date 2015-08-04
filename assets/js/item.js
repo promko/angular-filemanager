@@ -7,6 +7,8 @@
                 name: model && model.name || '',
                 path: path || [],
                 type: model && model.type || 'file',
+                id: model && model.id || '',
+                parent_id: model && model.parent_id || '',
                 size: model && model.size || 0,
                 date: convertDate(model && model.date),
                 perms: new Chmod(model && model.rights),
@@ -63,6 +65,7 @@
             var data = {params: {
                 mode: "addfolder",
                 path: self.tempModel.path.join('/'),
+                parent_id: self.tempModel.parent_id,
                 name: self.tempModel.name
             }};
 
@@ -129,49 +132,49 @@
         };
 
         Item.prototype.compress = function(success, error) {
-            var self = this;
-            var data = {params: {
-                mode: "compress",
-                path: self.model.fullPath(),
-                destination: self.tempModel.fullPath()
-            }};
-            if (self.tempModel.name.trim()) {
-                self.inprocess = true;
-                self.error = '';
-                return $http.post(fileManagerConfig.compressUrl, data).success(function(data) {
-                    self.defineCallback(data, success, error);
-                }).error(function(data) {
-                    self.error = data.result && data.result.error ?
-                        data.result.error:
-                        $translate.instant('error_compressing');
-                    typeof error === 'function' && error(data);
-                })['finally'](function() {
-                    self.inprocess = false;
-                });
-            }
+            //var self = this;
+            //var data = {params: {
+            //    mode: "compress",
+            //    path: self.model.fullPath(),
+            //    destination: self.tempModel.fullPath()
+            //}};
+            //if (self.tempModel.name.trim()) {
+            //    self.inprocess = true;
+            //    self.error = '';
+            //    return $http.post(fileManagerConfig.compressUrl, data).success(function(data) {
+            //        self.defineCallback(data, success, error);
+            //    }).error(function(data) {
+            //        self.error = data.result && data.result.error ?
+            //            data.result.error:
+            //            $translate.instant('error_compressing');
+            //        typeof error === 'function' && error(data);
+            //    })['finally'](function() {
+            //        self.inprocess = false;
+            //    });
+            //}
         };
 
         Item.prototype.extract = function(success, error) {
-            var self = this;
-            var data = {params: {
-                mode: "extract",
-                path: self.model.fullPath(),
-                sourceFile: self.model.fullPath(),
-                destination: self.tempModel.fullPath()
-            }};
-
-            self.inprocess = true;
-            self.error = '';
-            return $http.post(fileManagerConfig.extractUrl, data).success(function(data) {
-                self.defineCallback(data, success, error);
-            }).error(function(data) {
-                self.error = data.result && data.result.error ?
-                    data.result.error:
-                    $translate.instant('error_extracting');
-                typeof error === 'function' && error(data);
-            })["finally"](function() {
-                self.inprocess = false;
-            });
+            //var self = this;
+            //var data = {params: {
+            //    mode: "extract",
+            //    path: self.model.fullPath(),
+            //    sourceFile: self.model.fullPath(),
+            //    destination: self.tempModel.fullPath()
+            //}};
+            //
+            //self.inprocess = true;
+            //self.error = '';
+            //return $http.post(fileManagerConfig.extractUrl, data).success(function(data) {
+            //    self.defineCallback(data, success, error);
+            //}).error(function(data) {
+            //    self.error = data.result && data.result.error ?
+            //        data.result.error:
+            //        $translate.instant('error_extracting');
+            //    typeof error === 'function' && error(data);
+            //})["finally"](function() {
+            //    self.inprocess = false;
+            //});
         };
 
         Item.prototype.download = function(preview) {
@@ -256,26 +259,26 @@
         };
 
         Item.prototype.changePermissions = function(success, error) {
-            var self = this;
-            var data = {params: {
-                mode: "changepermissions",
-                path: self.tempModel.fullPath(),
-                perms: self.tempModel.perms.toOctal(),
-                permsCode: self.tempModel.perms.toCode(),
-                recursive: self.tempModel.recursive
-            }};
-            self.inprocess = true;
-            self.error = '';
-            return $http.post(fileManagerConfig.permissionsUrl, data).success(function(data) {
-                self.defineCallback(data, success, error);
-            }).error(function(data) {
-                self.error = data.result && data.result.error ?
-                    data.result.error:
-                    $translate.instant('error_changing_perms');
-                typeof error === 'function' && error(data);
-            })['finally'](function() {
-                self.inprocess = false;
-            });
+            //var self = this;
+            //var data = {params: {
+            //    mode: "changepermissions",
+            //    path: self.tempModel.fullPath(),
+            //    perms: self.tempModel.perms.toOctal(),
+            //    permsCode: self.tempModel.perms.toCode(),
+            //    recursive: self.tempModel.recursive
+            //}};
+            //self.inprocess = true;
+            //self.error = '';
+            //return $http.post(fileManagerConfig.permissionsUrl, data).success(function(data) {
+            //    self.defineCallback(data, success, error);
+            //}).error(function(data) {
+            //    self.error = data.result && data.result.error ?
+            //        data.result.error:
+            //        $translate.instant('error_changing_perms');
+            //    typeof error === 'function' && error(data);
+            //})['finally'](function() {
+            //    self.inprocess = false;
+            //});
         };
 
         Item.prototype.isFolder = function() {

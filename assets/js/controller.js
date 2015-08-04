@@ -114,6 +114,7 @@
         $scope.createFolder = function(item) {
             var name = item.tempModel.name && item.tempModel.name.trim();
             item.tempModel.type = 'dir';
+            item.tempModel.parent_id = $scope.fileNavigator.currentId()
             item.tempModel.path = $scope.fileNavigator.currentPath;
             if (name && !$scope.fileNavigator.fileNameExists(name)) {
                 item.createFolder(function() {
@@ -127,7 +128,7 @@
         };
 
         $scope.uploadFiles = function() {
-            $scope.fileUploader.upload($scope.uploadFileList, $scope.fileNavigator.currentPath).success(function() {
+            $scope.fileUploader.upload($scope.uploadFileList, $scope.fileNavigator.currentId()).success(function() {
                 $scope.fileNavigator.refresh();
                 $('#uploadfile').modal('hide');
             }).error(function(data) {

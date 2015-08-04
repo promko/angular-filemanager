@@ -4,9 +4,9 @@
 
         var self = this;
         self.requesting = false; 
-        self.upload = function(fileList, path) {
+        self.upload = function(fileList, parent_id) {
             var form = new window.FormData();  
-            form.append('destination', '/' + path.join('/'));
+            form.append('parent_id', parent_id);
 
             for (var i = 0; i < fileList.length; i++) {
                 var fileObj = fileList.item(i);

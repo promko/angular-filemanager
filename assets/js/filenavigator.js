@@ -9,9 +9,15 @@
             this.requesting = false;
             this.fileList = [];
             this.currentPath = [];
+            this.IdPath = [];
             this.history = [];
             this.error = '';
         };
+
+            FileNavigator.prototype.currentId = function() {
+                var self = this;
+                return (self.IdPath.length ? self.IdPath[self.IdPath.length-1]: '');
+            }
 
         FileNavigator.prototype.refresh = function(success, error) {
             var self = this;
@@ -19,9 +25,10 @@
             var data = {params: {
                 mode: "list",
                 onlyFolders: false,
-                path: '/' + path
+                path: '/' + path,
+                parent_id: self.currentId()
             }};
-
+            console.log(data, self.IdPath);
             self.requesting = true;
             self.fileList = [];
             self.error = '';
@@ -47,6 +54,7 @@
         FileNavigator.prototype.buildTree = function(path) {
             var self = this;
             function recursive(parent, file, path) {
+                console.log(parent, file, path);
                 var absName = path ? (path + '/' + file.name) : file.name;
                 if (parent.name.trim() && path.trim().indexOf(parent.name) !== 0) {
                     parent.nodes = [];
@@ -61,7 +69,7 @@
                             return;
                         }
                     }
-                    parent.nodes.push({name: absName, nodes: []});
+                    parent.nodes.push({model: file, name: absName, nodes: []});
                 }
                 parent.nodes = parent.nodes.sort(function(a, b) {
                     return a.name < b.name ? -1 : a.name === b.name ? 0 : 1;
@@ -75,17 +83,21 @@
             }
         };
 
-        FileNavigator.prototype.folderClickByName = function(fullPath) {
-            var self = this;
-            fullPath = fullPath.replace(/^\/*/g, '').split('/');
-            self.currentPath = fullPath && fullPath[0] === "" ? [] : fullPath;
-            self.refresh();
-        };
+        //FileNavigator.prototype.folderClickByName = function(fullPath) {
+        //    console.log('error. fix folderClickByName. for now id by name is not retrived')
+        //    console.log(fullPath, self);
+        //    var self = this;
+        //    fullPath = fullPath.replace(/^\/*/g, '').split('/');
+        //    self.currentPath = fullPath && fullPath[0] === "" ? [] : fullPath;
+        //    self.refresh();
+        //};
 
         FileNavigator.prototype.folderClick = function(item) {
+            console.log(item);
             var self = this;
             if (item && item.model.type === 'dir') {
                 self.currentPath.push(item.model.name);
+                self.IdPath.push(item.model.id);
                 self.refresh();
             }
         };
@@ -94,6 +106,7 @@
             var self = this;
             if (self.currentPath[0]) {
                 self.currentPath = self.currentPath.slice(0, -1);
+                self.IdPath = self.IdPath.slice(0, -1);
                 self.refresh();
             }
         };
@@ -101,6 +114,7 @@
         FileNavigator.prototype.goTo = function(index) {
             var self = this;
             self.currentPath = self.currentPath.slice(0, index + 1);
+            self.IdPath = self.IdPath.slice(0, index + 1);
             self.refresh();
         };
 
