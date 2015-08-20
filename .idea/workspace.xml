@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="260c3edb-06b0-4e56-9f4f-d82e7b34172b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/angular-filemanager.css" afterPath="$PROJECT_DIR$/dist/angular-filemanager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/angular-filemanager.iml" afterPath="$PROJECT_DIR$/.idea/angular-filemanager.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/cached-templates.js" afterPath="$PROJECT_DIR$/dist/cached-templates.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/angular-filemanager.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/angular-filemanager.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/angular-filemanager.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/cached-templates.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/current-folder-breadcrumb.html" afterPath="$PROJECT_DIR$/assets/templates/current-folder-breadcrumb.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/filenavigator.js" afterPath="$PROJECT_DIR$/assets/js/filenavigator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/main-table.html" afterPath="$PROJECT_DIR$/assets/templates/main-table.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/navbar.html" afterPath="$PROJECT_DIR$/assets/templates/navbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/sidebar.html" afterPath="$PROJECT_DIR$/assets/templates/sidebar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="angular-filemanager.iws" />
@@ -43,9 +54,11 @@
       <file leaf-file-name="filenavigator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/filenavigator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1488" max-vertical-offset="3349">
-              <caret line="120" column="62" selection-start-line="120" selection-start-column="62" selection-end-line="120" selection-end-column="62" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1505" max-vertical-offset="3468">
+              <caret line="121" column="62" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
+              <folding>
+                <marker date="1440111738602" expanded="true" signature="6873:7005" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,8 +116,8 @@
       <file leaf-file-name="navbar.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/templates/navbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="748">
-              <caret line="13" column="128" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="128" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="765">
+              <caret line="15" column="84" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="128" />
               <folding />
             </state>
           </provider>
@@ -359,19 +372,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="2560" height="1392" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24980454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32972974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980454" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -487,7 +500,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1231" max-vertical-offset="2499">
           <caret line="95" column="27" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
-          <folding />
+          <folding>
+            <marker date="1440111738602" expanded="true" signature="6873:7005" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -572,7 +587,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1301" max-vertical-offset="2482">
           <caret line="94" column="26" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
-          <folding />
+          <folding>
+            <marker date="1440111738602" expanded="true" signature="6873:7005" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -640,7 +657,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="196" max-vertical-offset="2482">
           <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-          <folding />
+          <folding>
+            <marker date="1440111738602" expanded="true" signature="6873:7005" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -677,7 +696,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="993" max-vertical-offset="2261">
           <caret line="87" column="38" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
-          <folding />
+          <folding>
+            <marker date="1440111738602" expanded="true" signature="6873:7005" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -744,8 +765,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/templates/navbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="748">
-          <caret line="13" column="128" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="128" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="765">
+          <caret line="15" column="84" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="128" />
           <folding />
         </state>
       </provider>
@@ -768,9 +789,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/filenavigator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1488" max-vertical-offset="3349">
-          <caret line="120" column="62" selection-start-line="120" selection-start-column="62" selection-end-line="120" selection-end-column="62" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1505" max-vertical-offset="3468">
+          <caret line="121" column="62" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
+          <folding>
+            <marker date="1440111738602" expanded="true" signature="6873:7005" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
