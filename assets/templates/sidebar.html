@@ -9,6 +9,6 @@
         {{ (item.name.split('/').pop() || '/') | strLimit : 24 }}
     </a>
     <ul class="nav nav-sidebar">
-        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>name={{fileNavigator.itemsById[item.model.id].parent_id}}
-    </ul>fileNavigator.history.length={{fileNavigator.history.length}}
-</script>
+        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>
+    </ul>
+</script>root={{fileNavigator.root}}
