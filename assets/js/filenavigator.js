@@ -10,14 +10,17 @@
             this.fileList = [];
             this.currentPath = [];
             this.IdPath = [];
+            this.items = [];
             this.history = [];
             this.error = '';
+            this.itemsById = []; //array of objects
+            //this.names = [];
         };
 
-            FileNavigator.prototype.currentId = function() {
-                var self = this;
-                return (self.IdPath.length ? self.IdPath[self.IdPath.length-1]: '');
-            }
+        FileNavigator.prototype.currentId = function() {
+             var self = this;
+             return (self.IdPath.length ? self.IdPath[self.IdPath.length-1]: '');
+        }
 
         FileNavigator.prototype.refresh = function(success, error) {
             var self = this;
@@ -28,7 +31,7 @@
                 path: '/' + path,
                 parent_id: self.currentId()
             }};
-            console.log(data, self.IdPath);
+            //console.log(data, self.IdPath);
             self.requesting = true;
             self.fileList = [];
             self.error = '';
@@ -36,7 +39,16 @@
                 self.fileList = [];
                 angular.forEach(data.result, function(file) {
                     self.fileList.push(new Item(file, self.currentPath));
+                    //console.log('file.id='+ file.id);
+                    //console.log('file.parent_id='+ file.parent_id);
+                    if(!self.itemsById[file.id]) {
+                        self.itemsById[file.id]={};
+                        self.itemsById[file.id].parent_id = file.parent_id;
+                    }
                 });
+                //console.log('self.fileList='+self.fileList);
+                //console.log('self.currentPath='+self.currentPath);
+                //self.itemsById[item.model.id][parent_id] = item.model.parent_id;
                 self.requesting = false;
                 self.buildTree(path);
 
@@ -54,7 +66,7 @@
         FileNavigator.prototype.buildTree = function(path) {
             var self = this;
             function recursive(parent, file, path) {
-                console.log(parent, file, path);
+                //console.log('parent=', parent, 'file=', file, 'path=', path);
                 var absName = path ? (path + '/' + file.name) : file.name;
                 if (parent.name.trim() && path.trim().indexOf(parent.name) !== 0) {
                     parent.nodes = [];
@@ -81,6 +93,9 @@
                 var item = self.fileList[o];
                 item.isFolder() && recursive(self.history[0], item.model, path);
             }
+            console.log('self.history=',self.history);
+            console.log('self.items=',self.items);
+            console.log('self.itemsById=',self.itemsById);
         };
 
         //FileNavigator.prototype.folderClickByName = function(fullPath) {
@@ -92,12 +107,47 @@
         //    self.refresh();
         //};
 
+        /*returns index, not item itself*/
+        FileNavigator.prototype.findItemById = function(id){
+            var present = null;
+            angular.forEach(self.items,function(element, index){
+                if(id == item.model.id) {
+                    present = index;
+                }
+            });
+            return present;
+        };
+
         FileNavigator.prototype.folderClick = function(item) {
-            console.log(item);
+            //console.log('item=',item);
             var self = this;
             if (item && item.model.type === 'dir') {
-                self.currentPath.push(item.model.name);
-                self.IdPath.push(item.model.id);
+                item.model.opened = !item.model.opened;
+                if(!item.model.opened) {
+                    //self.items.length = self.findItemById(item.model.parent_id) + 1;
+                }
+                self.currentPath.push(item.model.name);//must be deprecated
+                var present = -1;// Is node already there?
+                angular.forEach(self.IdPath,function(element, index){
+                    if(element == item.model.id) {
+                        present = index;
+                    }
+                });
+                if(present > -1) {
+                    //console.log('splice');
+                    //self.IdPath.length = present + 1;
+                    //self.items.length = present + 1;
+                    //self.IdPath = self.IdPath.slice(0, present);
+                }   else {
+                    //console.log('push');
+                    self.IdPath.push(item.model.id); // better wäre self.IdPath.push(item.model);
+                    self.items.push(item);
+                    //self.names[item.model.id] = item.model.name;
+                }
+                //removeSiblings();
+                //self.IdPath.push(item.model.id);
+                //console.log('self.IdPath='+self.IdPath);
+                //console.log('self.items='+self.items[self.items.length-1].name);
                 self.refresh();
             }
         };

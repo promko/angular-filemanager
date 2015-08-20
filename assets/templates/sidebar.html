@@ -4,11 +4,11 @@
 
 <script type="text/ng-template" id="folder-branch-item">
     <a href="" ng-click="fileNavigator.folderClick(item)" class="animated fast fadeInDown">
-        <i class="glyphicon glyphicon-folder-close mr2" ng-show="!fileNavigator.currentPath.join('/').match('^' + item.name)"></i>
-        <i class="glyphicon glyphicon-folder-open mr2" ng-show="!!fileNavigator.currentPath.join('/').match('^' + item.name)"></i>
+        <i class="glyphicon glyphicon-folder-close mr2" ng-show="!item.model.opened"></i>
+        <i class="glyphicon glyphicon-folder-open mr2" ng-show="item.model.opened"></i>
         {{ (item.name.split('/').pop() || '/') | strLimit : 24 }}
     </a>
     <ul class="nav nav-sidebar">
-        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>
-    </ul>
+        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>name={{fileNavigator.itemsById[item.model.id].parent_id}}
+    </ul>fileNavigator.history.length={{fileNavigator.history.length}}
 </script>

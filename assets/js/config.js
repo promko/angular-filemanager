@@ -1,3 +1,4 @@
+// hello romane!!!
 (function(angular) {
     "use strict";
     angular.module('FileManagerApp').constant("fileManagerConfig", {
