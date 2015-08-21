@@ -8,6 +8,7 @@
         $scope.appName = fileManagerConfig.appName;
         $scope.orderProp = ['model.type', 'model.name'];
         $scope.query = '';
+        $scope.library = library;
         $scope.temp = new Item();
         $scope.fileNavigator = new FileNavigator();
         $scope.fileUploader = FileUploader;
