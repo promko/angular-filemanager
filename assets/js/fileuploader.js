@@ -7,7 +7,6 @@
         self.upload = function(fileList, parent_id) {
             var form = new window.FormData();  
             form.append('parent_id', parent_id);
-
             for (var i = 0; i < fileList.length; i++) {
                 var fileObj = fileList.item(i);
                 fileObj instanceof window.File && form.append('file-' + i, fileObj);
