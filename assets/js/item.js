@@ -9,6 +9,7 @@
                 type: model && model.type || 'file',
                 id: model && model.id || '',
                 parent_id: model && model.parent_id || '',
+                actions: model && model.actions || [],
                 size: model && model.size || 0,
                 date: convertDate(model && model.date),
                 perms: new Chmod(model && model.rights),

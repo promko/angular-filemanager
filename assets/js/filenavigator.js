@@ -120,7 +120,7 @@
         };
 
         FileNavigator.prototype.folderClick = function(item) {
-            //console.log('item=',item);
+            console.log('item=',item);
             var self = this;
             if (item && item.model.type === 'dir') {
                 item.model.opened = !item.model.opened;
