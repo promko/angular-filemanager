@@ -15,7 +15,7 @@
                 perms: new Chmod(model && model.rights),
                 content: model && model.content || '',
                 recursive: false,
-                opened: false,//maybe it's not a very good place, `cause it's view-concerned, but I'd like not to build additional structures
+                opened: false,//maybe it's not a very good place, `cause it's view-concerned, but I'd like not to build additional structures - RP
                 sizeKb: function() {
                     return Math.round(this.size / 1024, 1);
                 },

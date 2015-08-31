@@ -1,5 +1,5 @@
 <ul class="nav nav-sidebar file-tree-root">
-    <li ng-repeat="item in fileNavigator.history" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>
+    <li ng-repeat="item in fileNavigator.history" ng-include="'folder-branch-item'" ng-class="{'active': item.model.Id == fileNavigator.activeId}"></li>
 </ul>
 
 <script type="text/ng-template" id="folder-branch-item">
@@ -9,6 +9,7 @@
         {{ (item.name.split('/').pop() || '/') | strLimit : 24 }}
     </a>
     <ul class="nav nav-sidebar">
-        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>
+        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.model.Id == fileNavigator.activeId}"></li>
     </ul>
-</script>root={{fileNavigator.root}}
+</script>root={{fileNavigator.root}}<br/>
+fileNavigator.activeId=<br/>{{fileNavigator.activeId}}<br/>
