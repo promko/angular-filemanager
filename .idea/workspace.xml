@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="260c3edb-06b0-4e56-9f4f-d82e7b34172b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/angular-filemanager.min.js" afterPath="$PROJECT_DIR$/dist/angular-filemanager.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/cached-templates.js" afterPath="$PROJECT_DIR$/dist/cached-templates.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/controller.js" afterPath="$PROJECT_DIR$/assets/js/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/current-folder-breadcrumb.html" afterPath="$PROJECT_DIR$/assets/templates/current-folder-breadcrumb.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/filenavigator.js" afterPath="$PROJECT_DIR$/assets/js/filenavigator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/item.js" afterPath="$PROJECT_DIR$/assets/js/item.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/main-table.html" afterPath="$PROJECT_DIR$/assets/templates/main-table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/templates/sidebar.html" afterPath="$PROJECT_DIR$/assets/templates/sidebar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="angular-filemanager.iws" />
@@ -38,8 +32,8 @@
       <file leaf-file-name="filenavigator.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/filenavigator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42465752" vertical-offset="3496" max-vertical-offset="6012">
-              <caret line="197" column="55" selection-start-line="197" selection-start-column="55" selection-end-line="197" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.33904108" vertical-offset="3870" max-vertical-offset="6480">
+              <caret line="215" column="37" selection-start-line="215" selection-start-column="37" selection-end-line="215" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -783,8 +777,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/filenavigator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42465752" vertical-offset="3496" max-vertical-offset="6012">
-          <caret line="197" column="55" selection-start-line="197" selection-start-column="55" selection-end-line="197" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.33904108" vertical-offset="3870" max-vertical-offset="6480">
+          <caret line="215" column="37" selection-start-line="215" selection-start-column="37" selection-end-line="215" selection-end-column="37" />
           <folding />
         </state>
       </provider>
