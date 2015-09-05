@@ -63,14 +63,15 @@
         };
 
         Item.prototype.createFolder = function(success, error) {
+            console.log('Item.createFolder start')
             var self = this;
             var data = {params: {
                 mode: "addfolder",
-                path: self.tempModel.path.join('/'),
+                //path: self.tempModel.path.join('/'),
                 parent_id: self.tempModel.parent_id,
                 name: self.tempModel.name
             }};
-
+console.log('self.tempModel.parent_id=',self.tempModel.parent_id)
             if (self.tempModel.name.trim()) {
                 self.inprocess = true;
                 self.error = '';

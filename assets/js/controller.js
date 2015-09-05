@@ -115,9 +115,9 @@
         $scope.createFolder = function(item) {
             var name = item.tempModel.name && item.tempModel.name.trim();
             item.tempModel.type = 'dir';
-            item.tempModel.parent_id = $scope.fileNavigator.currentId()
-            item.tempModel.path = $scope.fileNavigator.currentPath;
-            if (name && !$scope.fileNavigator.fileNameExists(name)) {
+            item.tempModel.parent_id = $scope.fileNavigator.activeId
+            //item.tempModel.path = $scope.fileNavigator.currentPath;
+            if (name && !$scope.fileNavigator.fileNameExists(item.tempModel.parent_id,name)) {
                 item.createFolder(function() {
                     $scope.fileNavigator.refresh();
                     $('#newfolder').modal('hide');

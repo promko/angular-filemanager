@@ -9,20 +9,26 @@
             this.requesting = false;
             this.fileList = [];
             this.currentPath = [];
-            this.IdPath = [];//введено Олесем з метою замінити currentPath
+            this.idPath = [];//введено Олесем з метою замінити currentPath
             this.items = [];
-            this.history = [];
+            this.history = {};
             this.error = '';
-            this.root = '';//Id of current root
+            this.root = this.getInitialRoot();//library[0][0];//Id of current root
             this.itemsById = []; //array of objects
             this.activeId ='';//actually Id of active element
             this.breadCrumbs = [];
+            this.mainList = []; // to be shown in main (lower right) panel
+            //console.log('library = ',library);
           //this.names = [];
         };
 
+        FileNavigator.prototype.getInitialRoot = function() {
+            for (var a in library) return a;
+        }
+
         FileNavigator.prototype.currentId = function() {
              var self = this;
-             return (self.IdPath.length ? self.IdPath[self.IdPath.length-1]: '');
+             return (self.idPath.length ? self.idPath[self.idPath.length-1]: '');
         }
 
         FileNavigator.prototype.refresh = function(success, error) {
@@ -40,21 +46,40 @@
             self.error = '';
             $http.post(fileManagerConfig.listUrl, data).success(function(data) {
                 self.fileList = [];
-                angular.forEach(data.result, function(file) {
+                //console.log('data.data = ', data.data)
+                angular.forEach(data.data, function(file) {
+                    //console.log('file=',file)
                     self.fileList.push(new Item(file, self.currentPath));
                     if(!self.itemsById[file.id]) {//RP
+                        //console.log('1111111111111111111');
                         self.itemsById[file.id]={};
+                        self.itemsById[file.id].name = file.name;
+                        self.itemsById[file.id].cropable = file.cropable;
+                        self.itemsById[file.id].date = file.date;
+                        self.itemsById[file.id].size = file.size;
+                        self.itemsById[file.id].type = file.type;
+                        self.itemsById[file.id].opened = false;
                         self.itemsById[file.id].parent_id = file.parent_id;
+                        //console.log('self.itemsById[file.id] = ', self.itemsById[file.id]);
+                    } else {
+                        //console.log('222222222222222');
                     }
-                    if(!self.itemsById[file.parent_id]) {
-                        self.itemsById[file.parent_id]={};
-                        self.itemsById[file.parent_id].children = [];//Ids of children
+                    if(file.parent_id) {
+                        if(!self.itemsById[file.parent_id]) {
+                            //console.log('3333333333333333333');
+                            self.itemsById[file.parent_id]={};
+                        }
+                        if(!self.itemsById[file.parent_id].children)
+                            //console.log('444444444444444444');
+                            self.itemsById[file.parent_id].children = {}//Ids of children
+                        self.itemsById[file.parent_id].children[file.id] = file.id;
                     }
-                    self.itemsById[file.parent_id].children[file.id] = file.id;
+
                 });
-                console.log('self.fileList=',self.fileList);
+                //console.log('self.fileList=',self.fileList);
                 //console.log('self.itemsById=',self.itemsById);
                 self.requesting = false;
+                if(!self.activeId) self.activeId = self.root;
                 self.buildTree(path);
 
                 if (data.error) {
@@ -66,13 +91,13 @@
                 self.requesting = false;
                 typeof error === 'function' && error(data);
             });
-            console.log('self.breadCrumbs = ', self.breadCrumbs);
+            //console.log('self.breadCrumbs = ', self.breadCrumbs);
             console.log('refresh return from');
         };
 
         FileNavigator.prototype.buildTree = function(path) {
             console.log('buildTree start');
-            console.log('argument path=',path);
+            //console.log('argument path=',path);
             var self = this;
             function recursive(parent, file, path) {
                 console.log('recursive start');
@@ -109,13 +134,34 @@
                 console.log('recursive - normal return from ');
             };
             console.log('self.history=',self.history);
-            !self.history.length && self.history.push({Id:self.root, model: {Id:self.root}, name: path, nodes: []});
-            console.log('self.history=',self.history);
+            //!self.history.length && self.history.push({id:self.root, name:self.itemsById[self.root].name, nodes: []});
+            //!self.history.length && self.history.push({id:self.root, model:self.itemsById[self.root]});
+            if(!self.history[self.root]) {
+                self.history[self.root] = {id:self.root,model:self.itemsById[self.root]}
+            }
+            //!self.breadCrumbs.length && self.breadCrumbs.push({id:self.root, name:self.itemsById[self.root].name, nodes: []});
+            !self.breadCrumbs.length && self.breadCrumbs.push({id:self.root, model:self.itemsById[self.root]});
+            console.log('self.history =',self.history);
+            //console.log('self.breadCrumbs =',self.breadCrumbs);
             for (var o in self.fileList) {
                 var item = self.fileList[o];
-                console.log('candidat for recursive: item = ',item);
-                item.isFolder() && recursive(self.history[0], item.model, path);
+                //console.log('candidat for recursive: item = ',item);
+                //item.isFolder() && recursive(self.history[0], item.model, path);
             }
+            self.mainList = [];
+            console.log('Children before pushing',self.itemsById[self.activeId].children)
+            //console.log('self.itemsById[self.activeId].children.length = ',(self.itemsById[self.activeId].children).length)
+            for(var item in self.itemsById[self.activeId].children) {
+                if(self.itemsById[self.activeId].children.hasOwnProperty(item)){
+                    console.log('PUSHING: ', self.itemsById[item])
+                    self.mainList.push({id:item, model:self.itemsById[item]});
+                }
+            }
+            /*angular.forEach(self.itemsById[self.activeId].children, function(item) {
+                console.log('PUSHING: ', item)
+                self.mainList.push(item);
+            });*/
+            //console.log('self.mainList = ', self.mainList);
             console.log('buildTree - Return from ');
         };
 
@@ -144,29 +190,50 @@
             console.log('item=',item);
             var self = this;
             self.breadCrumbs = [];
-            self.activeId = item.model.id;
-            console.log('Adding to breadcrumbs:');
-            console.log('self.itemsById = ',self.itemsById)
-            console.log(item);
-            self.breadCrumbs.push(item);
-            var parentId = self.activeId;
-            while(parentId && self.itemsById[parentId] && self.itemsById[parentId].parent_id != self.root) {
+            self.activeId = item.id;
+            //console.log('Adding to breadcrumbs:');
+            //console.log('self.itemsById = ',self.itemsById)
+
+            self.breadCrumbs.push({id:self.activeId, model:self.itemsById[self.activeId]});
+            var parentId = self.itemsById[self.activeId].parent_id;
+            //var parentId = self.activeId;
+            while(parentId && parentId != '' && parentId in self.itemsById) {
+                //console.log('parentId = ', parentId);
+                //console.log('Adding to breadcrumbs:');
+                //console.log(self.itemsById[parentId]);
+                self.breadCrumbs.push({id:parentId, model:self.itemsById[parentId]});
                 parentId = self.itemsById[parentId].parent_id;
-                console.log('parentId = ', parentId);
-                console.log('Adding to breadcrumbs:');
-                console.log(self.itemsById[parentId]);
-                self.breadCrumbs.push(self.itemsById[parentId]);
             }
             self.breadCrumbs.reverse();
-            console.log('self.IdPath =', self.IdPath);
-            console.log('self.currentPath =', self.currentPath);
+            console.log('self.breadCrumbs =', self.breadCrumbs);
+            //console.log('self.currentPath =', self.currentPath);
             if (item && item.model.type === 'dir') {
-                item.model.opened = !item.model.opened;
-                if(!item.model.opened) {
-                    //self.items.length = self.findItemById(item.model.parent_id) + 1;
+                self.itemsById[self.activeId].opened = !self.itemsById[self.activeId].opened;
+                console.log('self.itemsById = ', self.itemsById);
+                if (self.itemsById[self.activeId].opened){
+                    console.log('self.history = ', self.history);
+                    self.history[self.activeId].nodes = {};
+                    console.log('adding nodes to history for',self.activeId)
+                    console.log('... from children', self.itemsById[self.activeId].children)
+
+                    for(var item in self.itemsById[self.activeId].children) {
+                        if(self.itemsById[self.activeId].children.hasOwnProperty(item)){
+                            console.log('adding node to history', item);
+                            self.history[self.activeId].nodes[item] = {id:item,model:self.itemsById[item]};
+                        }
+                    }
+                    /*self.itemsById[self.activeId].children.forEach(function(item){
+                            //self.history[self.activeId].nodes.push(self.itemsById[item]);
+                            console.log('adding node to history', item)
+                            self.history[self.activeId].nodes[item] = {id:item,model:self.itemsById[item]};
+                        }
+                    );*/
+                    console.log('self.history = ', self.history);
                 }
+                //item.opened = !item.opened;
+
                 //self.currentPath.push(item.model.name);//must be deprecated
-                console.log('self.currentPath =', self.currentPath);
+                /*console.log('self.currentPath =', self.currentPath);
                 var present = -1;// Is node already there?
                 angular.forEach(self.IdPath,function(element, index){
                     if(element == item.model.id) {
@@ -184,13 +251,14 @@
                     //self.items.push(item);
                     //self.names[item.model.id] = item.model.name;
                 }
+                */
                 //removeSiblings();
                 //self.IdPath.push(item.model.id);
                 //console.log('self.IdPath='+self.IdPath);
                 //console.log('library=',library);
                 self.refresh();
-                console.log('folderClick return from');
             }
+            console.log('folderClick return from');
         };
 
         FileNavigator.prototype.upDir = function() {
@@ -212,17 +280,24 @@
         FileNavigator.prototype.chroot = function(index) {
             var self = this;
             self.root = index;
-            //self.refresh();
+            self.refresh();
         };
 
-        FileNavigator.prototype.fileNameExists = function(fileName) {
+        FileNavigator.prototype.fileNameExists = function(parent_id, fileName) {//Check in the same level only - My change. RP
             var self = this;
-            for (var item in self.fileList) {
+            //console.log('fileName = ', fileName)
+            //console.log('parent_id = ', parent_id)
+            if ('children' in self.itemsById[parent_id])
+                return (fileName in  self.itemsById[parent_id].children)
+            else
+                return false
+            /*for (var item in self.fileList) {
                 item = self.fileList[item];
                 if (fileName.trim && item.model.name.trim() === fileName.trim()) {
                     return true;
                 }
             }
+             */
         };
 
         FileNavigator.prototype.listHasFolders = function() {

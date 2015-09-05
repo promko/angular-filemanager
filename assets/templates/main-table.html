@@ -14,7 +14,7 @@
                 {{"loading" | translate}}...
             </td>
         </tr>
-        <tr data-ng-show="!fileNavigator.requesting && fileNavigator.fileList.length < 1 && !fileNavigator.error">
+        <tr data-ng-show="!fileNavigator.requesting && fileNavigator.mainList.length < 1 && !fileNavigator.error">
             <td colspan="5">
                 {{"no_files_in_folder" | translate}}...
             </td>
@@ -24,7 +24,7 @@
                 {{ fileNavigator.error }}
             </td>
         </tr>
-        <tr data-ng-repeat="item in fileNavigator.fileList | filter: query | orderBy: orderProp" data-ng-show="!fileNavigator.requesting">
+        <tr data-ng-repeat="item in fileNavigator.mainList | filter: query | orderBy: orderProp" data-ng-show="!fileNavigator.requesting">
             <td>
                 <a href="" data-ng-click="smartClick(item)" ng-right-click="smartRightClick(item)" title="{{item.model.name}} ({{item.model.sizeKb()}}kb)">
                     <i class="glyphicon glyphicon-folder-close" data-ng-show="item.model.type === 'dir'"></i>
