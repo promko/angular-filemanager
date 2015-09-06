@@ -12,6 +12,7 @@
             this.idPath = [];//введено Олесем з метою замінити currentPath
             this.items = [];
             this.history = {};
+            //this.history_a = [];//needed because sort doesn't work with objects
             this.error = '';
             this.root = this.getInitialRoot();//library[0][0];//Id of current root
             this.itemsById = []; //array of objects
@@ -162,6 +163,7 @@
                 self.mainList.push(item);
             });*/
             //console.log('self.mainList = ', self.mainList);
+            //self.history_a = self.object2array(self.history);
             console.log('buildTree - Return from ');
         };
 
@@ -210,29 +212,49 @@
             if (item && item.model.type === 'dir') {
                 self.itemsById[self.activeId].opened = !self.itemsById[self.activeId].opened;
                 console.log('self.itemsById = ', self.itemsById);
-                if (self.itemsById[self.activeId].opened){
+                //if (self.itemsById[self.activeId].opened) {
                     console.log('self.history = ', self.history);
-                    var level = self.history[self.root];
-                    level.nodes = {};
+                    //var level = self.history[self.root];
+                    //level.nodes = {};
+                    var level_a = self.history[self.root];
+                    level_a.nodes_a = [];//objects are more elegant, but arrays enable sorting
                     var level_item_id = self.root;
                     for(var child_id in self.itemsById[level_item_id].children) {
                         if(self.itemsById[level_item_id].children.hasOwnProperty(child_id)){
-                            console.log('adding node to history', child_id);
-                            level.nodes[child_id] = {id:child_id, model:self.itemsById[child_id]};
+                            //console.log('adding node to history', child_id);
+                            //level.nodes[child_id] = {id:child_id, model:self.itemsById[child_id]};
+                            level_a.nodes_a.push({id:child_id, model:self.itemsById[child_id]});
                         }
                     }
+                    //console.log('nodes = ', level.nodes);
+                    //level.nodes = self.sortNodes(level.nodes); // does not help I don't know why
+                    //console.log('nodes AFTER sorting: ', level.nodes);
+                    //level.nodes_a = self.object2array(level.nodes);
+                    //level.nodes_a.sort(function(a, b) { return a.model.name - b.model.name; });
                     self.breadCrumbs.forEach(function(level_item){
                         if(level_item.id != self.root) {
-                            level = level.nodes[level_item.id];
-                            level.nodes = {};
+                            //level = level.nodes[level_item.id];
+                            //level.nodes = {};
+                            level_a.nodes_a.forEach(function(node) {
+                                if(node.id == level_item.id ) {
+                                    level_a = node;
+                                }
+                            });
+                            level_a.nodes_a = [];
                             for(var child_id in self.itemsById[level_item.id].children) {
                                 if(self.itemsById[level_item.id].children.hasOwnProperty(child_id)){
-                                    console.log('adding node to history', child_id);
-                                    level.nodes[child_id] = {id:child_id, model:self.itemsById[child_id]};
+                                    //console.log('adding node to history', child_id);
+                                    //level.nodes[child_id] = {id:child_id, model:self.itemsById[child_id]};
+                                    level_a.nodes_a.push({id:child_id, model:self.itemsById[child_id]});
                                 }
                             }
+                            //level.nodes_a = self.object2array(level.nodes);
+                            //console.log('nodes = ', level.nodes);
+                            //console.log('nodes_a = ', level_a.nodes_a);
+                            //level.nodes = self.sortNodes(level.nodes);//does not help I don't know why
+                            //console.log('nodes AFTER sorting: ', level.nodes);
                         }
-                    })
+                    });
                     /*
                     self.history[self.activeId].nodes = {};
                     console.log('adding nodes to history for',self.activeId)
@@ -251,7 +273,7 @@
                         }
                     );*/
                     console.log('self.history = ', self.history);
-                }
+                //}
                 //item.opened = !item.opened;
 
                 //self.currentPath.push(item.model.name);//must be deprecated
@@ -283,7 +305,42 @@
             console.log('folderClick return from');
         };
 
-        FileNavigator.prototype.upDir = function() {
+
+
+        FileNavigator.prototype.object2array = function(object) {
+            var temp = [];
+            for(var id in object) {
+                if(object.hasOwnProperty(id)){
+                    temp.push({id:id, model: object[id].model})
+                }
+            }
+            return temp;
+        }
+
+        FileNavigator.prototype.sortNodes = function(object) {
+            var temp = [];
+            var sorted = {}
+            console.log('Inside sortNodes')
+            console.log('object = ', object)
+            for(var id in object) {
+                if(object.hasOwnProperty(id)){
+                    temp.push({id:id, model: object[id].model})
+                }
+            }
+            console.log('array before sort = ', temp)
+            temp.sort(function(a, b) { return a.model.name - b.model.name; });
+            console.log('array after sort = ', temp)
+            temp.forEach(function(item) {
+                console.log(item.model.name);
+                sorted[item.id] = {id:item.id, model: item.model};
+            })
+            console.log('result object = ', sorted)
+            return sorted;
+        }
+
+
+
+            FileNavigator.prototype.upDir = function() {
             var self = this;
             if (self.currentPath[0]) {
                 self.currentPath = self.currentPath.slice(0, -1);

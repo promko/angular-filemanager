@@ -9,7 +9,7 @@
         {{ (item.model.name.split('/').pop() || '/') | strLimit : 24 }}<!--item.model.id=={{item.model.id}}-->
     </a>
     <ul class="nav nav-sidebar">
-        <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.id == fileNavigator.activeId}"></li>
+        <li ng-repeat="item in item.nodes_a | orderBy: orderProp " ng-include="'folder-branch-item'" ng-class="{'active': item.id == fileNavigator.activeId}"></li>
     </ul>
 </script><br/><br/><br/>root={{fileNavigator.root}}<br/>
 fileNavigator.activeId=<br/>{{fileNavigator.activeId}}<br/>
