@@ -121,6 +121,7 @@
                 item.createFolder(function() {
                     $scope.fileNavigator.refresh();
                     $('#newfolder').modal('hide');
+                    $scope.fileNavigator.folderClick($scope.fileNavigator.itemsById[item.tempModel.parent_id]);
                 });
             } else {
                 $scope.temp.error = $translate.instant('error_invalid_filename');

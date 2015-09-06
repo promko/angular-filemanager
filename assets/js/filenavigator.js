@@ -363,20 +363,22 @@
         };
 
         FileNavigator.prototype.fileNameExists = function(parent_id, fileName) {//Check in the same level only - My change. RP
+            //console.log('fileNameExists start')
             var self = this;
             //console.log('fileName = ', fileName)
             //console.log('parent_id = ', parent_id)
-            if ('children' in self.itemsById[parent_id])
-                return (fileName in  self.itemsById[parent_id].children)
-            else
-                return false
-            /*for (var item in self.fileList) {
-                item = self.fileList[item];
-                if (fileName.trim && item.model.name.trim() === fileName.trim()) {
-                    return true;
+            //console.log('self.itemsById[parent_id].children = ', self.itemsById[parent_id].children)
+            var exists = false;
+            for(var child_id in self.itemsById[parent_id].children) {
+                if(self.itemsById[parent_id].children.hasOwnProperty(child_id)){
+                    if(self.itemsById[child_id].name == fileName) {
+                        exists = true;
+                        break;
+                    }
                 }
             }
-             */
+            return exists;
+            //console.log('fileNameExists finish')
         };
 
         FileNavigator.prototype.listHasFolders = function() {
