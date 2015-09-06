@@ -7,10 +7,10 @@
 
         var FileNavigator = function() {
             this.requesting = false;
-            this.fileList = [];
-            this.currentPath = [];
-            this.idPath = [];//введено Олесем з метою замінити currentPath
-            this.items = [];
+            //this.fileList = [];
+            //this.currentPath = [];
+            //this.idPath = [];//введено Олесем з метою замінити currentPath
+            //this.items = [];
             this.history = {};
             //this.history_a = [];//needed because sort doesn't work with objects
             this.error = '';
@@ -26,31 +26,31 @@
         FileNavigator.prototype.getInitialRoot = function() {
             for (var a in library) return a;
         }
-
+/*
         FileNavigator.prototype.currentId = function() {
              var self = this;
              return (self.idPath.length ? self.idPath[self.idPath.length-1]: '');
         }
-
+*/
         FileNavigator.prototype.refresh = function(success, error) {
             console.log('refresh start');
             var self = this;
-            var path = self.currentPath.join('/');
+            //var path = self.currentPath.join('/');
             var data = {params: {
                 mode: "list",
                 onlyFolders: false,
-                path: '/' + path,
-                parent_id: self.currentId()
+                //path: '/' + path,
+                //parent_id: self.currentId()
             }};
             self.requesting = true;
-            self.fileList = [];
+            //self.fileList = [];
             self.error = '';
             $http.post(fileManagerConfig.listUrl, data).success(function(data) {
-                self.fileList = [];
+                //self.fileList = [];
                 //console.log('data.data = ', data.data)
                 angular.forEach(data.data, function(file) {
                     //console.log('file=',file)
-                    self.fileList.push(new Item(file, self.currentPath));
+                    //self.fileList.push(new Item(file, self.currentPath));
                     if(!self.itemsById[file.id]) {//RP
                         //console.log('1111111111111111111');
                         self.itemsById[file.id]={};
@@ -81,7 +81,8 @@
                 //console.log('self.itemsById=',self.itemsById);
                 self.requesting = false;
                 if(!self.activeId) self.activeId = self.root;
-                self.buildTree(path);
+                //self.buildTree(path);
+                self.buildTree();
 
                 if (data.error) {
                     self.error = data.error;
@@ -96,10 +97,11 @@
             console.log('refresh return from');
         };
 
-        FileNavigator.prototype.buildTree = function(path) {
+        FileNavigator.prototype.buildTree = function() {
             console.log('buildTree start');
             //console.log('argument path=',path);
             var self = this;
+            /*
             function recursive(parent, file, path) {
                 console.log('recursive start');
                 console.log('parent=', parent, 'file=', file, 'path=', path);
@@ -134,6 +136,7 @@
                 console.log('parent.nodes = ', parent.nodes);
                 console.log('recursive - normal return from ');
             };
+            */
             console.log('self.history=',self.history);
             //!self.history.length && self.history.push({id:self.root, name:self.itemsById[self.root].name, nodes: []});
             //!self.history.length && self.history.push({id:self.root, model:self.itemsById[self.root]});
@@ -144,11 +147,13 @@
             !self.breadCrumbs.length && self.breadCrumbs.push({id:self.root, model:self.itemsById[self.root]});
             console.log('self.history =',self.history);
             //console.log('self.breadCrumbs =',self.breadCrumbs);
+            /*
             for (var o in self.fileList) {
                 var item = self.fileList[o];
                 //console.log('candidat for recursive: item = ',item);
                 //item.isFolder() && recursive(self.history[0], item.model, path);
             }
+            */
             self.mainList = [];
             console.log('Children before pushing',self.itemsById[self.activeId].children)
             //console.log('self.itemsById[self.activeId].children.length = ',(self.itemsById[self.activeId].children).length)
