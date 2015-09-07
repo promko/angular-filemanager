@@ -40,7 +40,7 @@
                 {{item.model.date.toString()}}
             </td>
             <td class="hidden-sm hidden-xs">
-                <input type="checkbox" data-ng-model="item.model.chosen" />
+                <input type="checkbox" data-ng-model="item.model.chosen" data-ng-click="fileNavigator.choose(item)" />
             </td>
             <td class="hidden-sm hidden-xs">
                 {{item.model.perms.toCode(item.model.type === 'dir'?'d':'-')}}
