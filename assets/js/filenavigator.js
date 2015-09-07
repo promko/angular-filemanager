@@ -11,7 +11,8 @@
             //this.currentPath = [];
             //this.idPath = [];//введено Олесем з метою замінити currentPath
             //this.items = [];
-            this.history = {};
+            this.history = {};//is a base for the tree, shown in sidebar
+            this.historyWide = {};//is a base for the tree, shown in sidebar
             //this.history_a = [];//needed because sort doesn't work with objects
             this.error = '';
             this.root = this.getInitialRoot();//library[0][0];//Id of current root
@@ -84,9 +85,7 @@
             console.log('refresh return from');
         };
 
-        FileNavigator.prototype.buildTree = function() {
-            console.log('buildTree start');
-            //console.log('argument path=',path);
+        FileNavigator.prototype.buildHistory = function() {
             var self = this;
             console.log('self.history=',self.history);
             if(!self.history[self.root]) {
@@ -94,6 +93,10 @@
             }
             //!self.breadCrumbs.length && self.breadCrumbs.push({id:self.root, model:self.itemsById[self.root]});
             console.log('self.history =',self.history);
+        };
+
+        FileNavigator.prototype.buildMainList = function() {
+            var self = this;
             self.mainList = [];
             console.log('Children before pushing',self.itemsById[self.activeId].children)
             for(var item in self.itemsById[self.activeId].children) {
@@ -102,6 +105,32 @@
                     self.mainList.push({id:item, model:self.itemsById[item]});
                 }
             }
+        };
+
+        FileNavigator.prototype.buildTree = function() {
+            console.log('buildTree start');
+            //console.log('argument path=',path);
+            var self = this;
+            self.buildHistory();
+            /*
+            console.log('self.history=',self.history);
+            if(!self.history[self.root]) {
+                self.history[self.root] = {id:self.root,model:self.itemsById[self.root]}
+            }
+            //!self.breadCrumbs.length && self.breadCrumbs.push({id:self.root, model:self.itemsById[self.root]});
+            console.log('self.history =',self.history);
+            */
+            self.buildMainList();
+            /*
+            self.mainList = [];
+            console.log('Children before pushing',self.itemsById[self.activeId].children)
+            for(var item in self.itemsById[self.activeId].children) {
+                if(self.itemsById[self.activeId].children.hasOwnProperty(item)){
+                    console.log('PUSHING: ', self.itemsById[item])
+                    self.mainList.push({id:item, model:self.itemsById[item]});
+                }
+            }
+            */
             console.log('buildTree - Return from ');
         };
 
@@ -134,6 +163,26 @@
                 self.breadCrumbs.reverse();
                 console.log('self.breadCrumbs =', self.breadCrumbs);
                 console.log('buildBreadCrumbs finish');
+            };
+
+
+            //Items from this array will be a base for Tree Building - analogisch as breadCrumbs was. But this must be wider
+            //Let's go from root down until at least single node is dir+open+has_children
+            FileNavigator.prototype.formArray4Tree = function() {
+                var self = this;
+                var treeItems = [];
+                var current_id = self.root;
+                var level_a = [];
+                level_a.push(self.history[self.root]);
+                var goDeeper = false;
+                level_a.forEach(function(ancestor){
+
+                })
+                for(var child_id in self.itemsById[current_id].children) {
+                    if(self.itemsById[current_id].children.hasOwnProperty(child_id)){
+
+                    }
+                }
             };
 
             FileNavigator.prototype.folderClick = function(item) {
